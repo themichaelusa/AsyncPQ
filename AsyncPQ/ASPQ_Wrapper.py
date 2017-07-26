@@ -51,7 +51,8 @@ class AsyncRWQueue(AsyncPQWrapper):
 		taskloop.stop()
 		taskloop.close()
 
-		return tuple(rValues[::-1])
+		if (len(rValues) == 1): return rValues[0]
+		else: return tuple(rValues[::-1])
 		
 class AsyncPQueue(AsyncPQWrapper):
 	
@@ -63,7 +64,7 @@ class AsyncPQueue(AsyncPQWrapper):
 		uPriorList = sorted(list(set([unit.priority for unit in units])))[::-1]
 		sortedUnits = [list(filter(lambda x: x.priority == u, units)) for u in uPriorList]
 		
-		sFutures = []
+		sFutures, rValues = [], []
 		for sUnit in sortedUnits:
 			sortedTasks = []
 			for unit in sUnit:
@@ -71,8 +72,8 @@ class AsyncPQueue(AsyncPQWrapper):
 			sFutures.append(asyncio.gather(*sortedTasks))
 		
 		for sFuture in sFutures:
-			taskloop.run_until_complete(sFuture)
+			rValues.append(taskloop.run_until_complete(sFuture))
 
 		taskloop.stop()
-		taskloop.close()
+		taskloop.close()	
 		
