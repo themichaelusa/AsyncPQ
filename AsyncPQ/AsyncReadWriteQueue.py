@@ -1,3 +1,4 @@
+from AsyncPQ import ASPQ_Wrapper, asQueue
 from ASPQ_Wrapper import AsyncRWQueue
 from asQueue import AsyncQueue
 
