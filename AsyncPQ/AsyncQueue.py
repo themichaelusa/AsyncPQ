@@ -1,5 +1,33 @@
-from .ASPQ_Wrapper import AsyncRWQueue
-from .AsQueue import AsyncQueue
+from .ASPQ_Wrapper import AsyncPQueue, AsyncRWQueue
+
+class AsyncQueue(object):
+
+	def __init__(self, classDict = {}):
+		
+		self.asyncQueue = None
+		self.classDict = classDict
+
+	def updateClassDict(self, newDict):
+		self.classDict.update(newDict)
+
+	def processTasks(self):
+		return self.asyncQueue.processUnits()
+
+class AsyncPriorityQueue(AsyncQueue):
+
+	def __init__(self, classDict = {}):
+		
+		super().__init__(classDict)
+		self.asyncQueue = AsyncPQueue()
+
+	def addTask(self, priority, functionRef, *funcArgs):
+		self.asyncQueue.addQUnit(functionRef, funcArgs, priority)
+
+	def addClassTask(self, priority, className, operation, *opArgs): 
+
+		classInst = self.classDict[className]
+		functionRef = getattr(classInst, operation)
+		self.asyncQueue.addQUnit(functionRef, opArgs, priority)
 
 class AsyncReadWriteQueue(AsyncQueue):
 
