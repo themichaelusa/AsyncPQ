@@ -1,4 +1,4 @@
-import ASPQ_Wrapper as apq
+from ASPQ_Wrapper import AsyncRWQueue
 from asQueue import AsyncQueue
 
 class AsyncReadWriteQueue(AsyncQueue):
@@ -6,7 +6,7 @@ class AsyncReadWriteQueue(AsyncQueue):
 	def __init__(self, classDict = {}):
 		
 		super().__init__(classDict)
-		self.asyncQueue = apq.AsyncRWQueue()
+		self.asyncQueue = AsyncRWQueue()
 		self.WRITE_PRIORITY = 1
 		self.READ_PRIORITY = 0
 

@@ -1,4 +1,4 @@
-import ASPQ_Wrapper as apq
+from ASPQ_Wrapper import AsyncPQueue
 from asQueue import AsyncQueue
 
 class AsyncPriorityQueue(AsyncQueue):
@@ -6,7 +6,7 @@ class AsyncPriorityQueue(AsyncQueue):
 	def __init__(self, classDict = {}):
 		
 		super().__init__(classDict)
-		self.asyncQueue = apq.AsyncPQueue()
+		self.asyncQueue = AsyncPQueue()
 
 	def addTask(self, priority, functionRef, *funcArgs):
 		self.asyncQueue.addQUnit(functionRef, funcArgs, priority)

@@ -1,3 +1,4 @@
+
 class AsyncQueue(object):
 
 	def __init__(self, classDict = {}):
