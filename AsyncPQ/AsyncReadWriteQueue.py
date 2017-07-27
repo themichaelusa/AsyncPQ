@@ -1,6 +1,5 @@
-from AsyncPQ import ASPQ_Wrapper, AsQueue
-from ASPQ_Wrapper import AsyncRWQueue
-from AsQueue import AsyncQueue
+from .ASPQ_Wrapper import AsyncRWQueue
+from .AsQueue import AsyncQueue
 
 class AsyncReadWriteQueue(AsyncQueue):
 

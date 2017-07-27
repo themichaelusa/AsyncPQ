@@ -1,6 +1,5 @@
-from AsyncPQ import ASPQ_Wrapper, AsQueue
-from ASPQ_Wrapper import AsyncPQueue
-from AsQueue import AsyncQueue
+from .ASPQ_Wrapper import AsyncPQueue
+from .AsQueue import AsyncQueue
 
 class AsyncPriorityQueue(AsyncQueue):
 
